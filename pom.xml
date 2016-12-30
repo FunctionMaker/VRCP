@@ -4,7 +4,7 @@
   <groupId>com.carfi</groupId>
   <artifactId>vrcp</artifactId>
   <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>vrcp Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
@@ -16,6 +16,8 @@
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+		<shiro.version>1.2.3</shiro.version>
+		<ehcache.core.version>2.5.1</ehcache.core.version>
 	</properties>
   
   <dependencies>
@@ -181,6 +183,33 @@
       <artifactId>commons-lang</artifactId>  
       <version>2.6</version>  
     </dependency>
+    <!-- shiro相关 -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<!-- ehcache -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache.core.version}</version>
+		</dependency>
 	</dependencies>
   <build>
     <finalName>vrcp</finalName>
