@@ -39,6 +39,7 @@
 				/layer/** = anon
 				/vendor/** = anon
 				/ads/** = anon
+				/logout = logout
 				/** = authc
 			</value>
 		</property>

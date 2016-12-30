@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.carfi.vrcp.constant.Constant;
+import com.carfi.vrcp.pojo.SessionUser;
 import com.carfi.vrcp.util.CarfiUserUtil;
 import com.carfi.vrcp.util.VerifyCodeUtils;
 
@@ -34,6 +35,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(Model model, HttpServletRequest request){
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
+		SessionUser sessionUser = CarfiUserUtil.getSessionUser();
 		if (exceptionClassName != null) {
 			String message = "";
 			if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
@@ -57,21 +59,11 @@ public class LoginController {
 	@RequestMapping("/index")
 	public String index(Model model){
 		//使doGetAuthorizationInfo执行
+		SessionUser sessionUser = CarfiUserUtil.getSessionUser();
+		SecurityUtils.getSubject().getSession().setTimeout(-1000l);
 		SecurityUtils.getSubject().hasRole("test");
 		model.addAttribute("menus",CarfiUserUtil.getMens());
 		return "index";
-	}
-	/**
-	 * 退出
-	 * @param attr
-	 * @return
-	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(RedirectAttributes attr) {
-		// 使用权限管理 退出登录
-		SecurityUtils.getSubject().logout();
-		attr.addFlashAttribute("message", "您已安全退出");
-		return "";
 	}
 	
 	/**
@@ -108,4 +100,5 @@ public class LoginController {
 		}
 		return resultMap;
 	}
+	
 }
