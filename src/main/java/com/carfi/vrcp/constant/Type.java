@@ -6,9 +6,10 @@ package com.carfi.vrcp.constant;
  * @CREATEDATE 2016年12月29日
  */
 public interface Type {
+	
 	/** 权限类型  */
 	enum Permission implements Type{
-		MENU("1"), BUTTON("2");
+		RESOUCE("0"),MENU("1"), BUTTON("2");
 		/**类别id*/
 		private String id;
 		private Permission(String id){
@@ -21,7 +22,6 @@ public interface Type {
 		public void setId(String id) {
 			this.id = id;
 		}
-		
 	}
 	
 }

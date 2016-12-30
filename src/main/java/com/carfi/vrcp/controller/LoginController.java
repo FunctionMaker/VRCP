@@ -35,7 +35,6 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(Model model, HttpServletRequest request){
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
-		SessionUser sessionUser = CarfiUserUtil.getSessionUser();
 		if (exceptionClassName != null) {
 			String message = "";
 			if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
@@ -59,10 +58,11 @@ public class LoginController {
 	@RequestMapping("/index")
 	public String index(Model model){
 		//使doGetAuthorizationInfo执行
-		SessionUser sessionUser = CarfiUserUtil.getSessionUser();
 		SecurityUtils.getSubject().getSession().setTimeout(-1000l);
-		SecurityUtils.getSubject().hasRole("test");
 		model.addAttribute("menus",CarfiUserUtil.getMens());
+		model.addAttribute("username",CarfiUserUtil.getSysUser().getUsername());
+		model.addAttribute("loginTime",CarfiUserUtil.getSysUser().getLastLoginTime());
+		
 		return "index";
 	}
 	

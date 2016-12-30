@@ -82,8 +82,8 @@
             <span class="nav navbar-top-links navbar-right">
             	<fmt:formatDate value="${USER_IN_SESSION.lastLoginTime}" var="loginTime" pattern="yyyy-MM-dd HH:mm:ss" />
             	<span id="userSpan">
-            		欢迎:${USER_IN_SESSION.username }&nbsp;上次登录:${loginTime}&nbsp;
-            		<a href="<%=path%>/carfi/logout/index"><i class="fa fa-power-off"></i></a>
+            		欢迎:${username }&nbsp;上次登录:${loginTime}&nbsp;
+            		<a href="<%=path%>/logout"><i class="fa fa-power-off"></i></a>
             	</span>
             </span>
 

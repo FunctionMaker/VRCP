@@ -34,6 +34,17 @@
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
 	</bean>
+	<!-- 通过annotation-driven可以替代转换器 -->
+	<mvc:annotation-driven conversion-service="conversionService" > </mvc:annotation-driven>	
+	<!-- 转换器 -->
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.carfi.vrcp.converter.DateConverter" />
+			</list>
+		</property>
+	</bean>
 
 	<!-- 对静态资源文件的访问 -->
 	<mvc:default-servlet-handler />
