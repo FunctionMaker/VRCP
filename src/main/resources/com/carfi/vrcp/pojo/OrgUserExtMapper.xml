@@ -1,93 +1,117 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carfi.vrcp.mapper.OrgUserExtMapper" >
-  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.OrgUserExt" >
-    <id column="user_ext_id" property="userExtId" jdbcType="VARCHAR" />
-    <result column="manager" property="manager" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
-    <result column="terminal_num" property="terminalNum" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carfi.vrcp.dao.OrgUserExtMapper">
+  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.OrgUserExt">
+    <id column="user_ext_id" jdbcType="VARCHAR" property="userExtId" />
+    <result column="manager" jdbcType="CHAR" property="manager" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="create_bycarfi" jdbcType="CHAR" property="createBycarfi" />
+    <result column="create_by" jdbcType="CHAR" property="createBy" />
+    <result column="terminal_num" jdbcType="INTEGER" property="terminalNum" />
+    <result column="is_effective" jdbcType="BIT" property="isEffective" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    user_ext_id, manager, phone, create_by, terminal_num
+  <sql id="Base_Column_List">
+    user_ext_id, manager, phone, create_bycarfi, create_by, terminal_num, is_effective
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from org_user_ext
     where user_ext_id = #{userExtId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from org_user_ext
     where user_ext_id = #{userExtId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.carfi.vrcp.pojo.OrgUserExt" >
+  <insert id="insert" parameterType="com.carfi.vrcp.pojo.OrgUserExt">
     insert into org_user_ext (user_ext_id, manager, phone, 
-      create_by, terminal_num)
-    values (#{userExtId,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{createBy,jdbcType=VARCHAR}, #{terminalNum,jdbcType=INTEGER})
+      create_bycarfi, create_by, terminal_num, 
+      is_effective)
+    values (#{userExtId,jdbcType=VARCHAR}, #{manager,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, 
+      #{createBycarfi,jdbcType=CHAR}, #{createBy,jdbcType=CHAR}, #{terminalNum,jdbcType=INTEGER}, 
+      #{isEffective,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.OrgUserExt" >
+  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.OrgUserExt">
     insert into org_user_ext
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userExtId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userExtId != null">
         user_ext_id,
       </if>
-      <if test="manager != null" >
+      <if test="manager != null">
         manager,
       </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         phone,
       </if>
-      <if test="createBy != null" >
+      <if test="createBycarfi != null">
+        create_bycarfi,
+      </if>
+      <if test="createBy != null">
         create_by,
       </if>
-      <if test="terminalNum != null" >
+      <if test="terminalNum != null">
         terminal_num,
       </if>
+      <if test="isEffective != null">
+        is_effective,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userExtId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userExtId != null">
         #{userExtId,jdbcType=VARCHAR},
       </if>
-      <if test="manager != null" >
-        #{manager,jdbcType=VARCHAR},
+      <if test="manager != null">
+        #{manager,jdbcType=CHAR},
       </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
       </if>
-      <if test="createBy != null" >
-        #{createBy,jdbcType=VARCHAR},
+      <if test="createBycarfi != null">
+        #{createBycarfi,jdbcType=CHAR},
       </if>
-      <if test="terminalNum != null" >
+      <if test="createBy != null">
+        #{createBy,jdbcType=CHAR},
+      </if>
+      <if test="terminalNum != null">
         #{terminalNum,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null">
+        #{isEffective,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.OrgUserExt" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.OrgUserExt">
     update org_user_ext
-    <set >
-      <if test="manager != null" >
-        manager = #{manager,jdbcType=VARCHAR},
+    <set>
+      <if test="manager != null">
+        manager = #{manager,jdbcType=CHAR},
       </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
+      <if test="phone != null">
+        phone = #{phone,jdbcType=CHAR},
       </if>
-      <if test="createBy != null" >
-        create_by = #{createBy,jdbcType=VARCHAR},
+      <if test="createBycarfi != null">
+        create_bycarfi = #{createBycarfi,jdbcType=CHAR},
       </if>
-      <if test="terminalNum != null" >
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=CHAR},
+      </if>
+      <if test="terminalNum != null">
         terminal_num = #{terminalNum,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null">
+        is_effective = #{isEffective,jdbcType=BIT},
       </if>
     </set>
     where user_ext_id = #{userExtId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.OrgUserExt" >
+  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.OrgUserExt">
     update org_user_ext
-    set manager = #{manager,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      terminal_num = #{terminalNum,jdbcType=INTEGER}
+    set manager = #{manager,jdbcType=CHAR},
+      phone = #{phone,jdbcType=CHAR},
+      create_bycarfi = #{createBycarfi,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=CHAR},
+      terminal_num = #{terminalNum,jdbcType=INTEGER},
+      is_effective = #{isEffective,jdbcType=BIT}
     where user_ext_id = #{userExtId,jdbcType=VARCHAR}
   </update>
 </mapper>

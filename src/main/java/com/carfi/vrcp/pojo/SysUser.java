@@ -13,15 +13,11 @@ public class SysUser {
 
     private String password;
 
-    private String salt;
-
-    private String userType;
+    private Integer userType;
 
     private Boolean isEffective;
 
     private Date lastLoginTime;
-
-    private String lastLoginTip;
 
     private String userExtId;
 
@@ -65,20 +61,12 @@ public class SysUser {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
-    }
-
-    public String getUserType() {
+    public Integer getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType == null ? null : userType.trim();
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 
     public Boolean getIsEffective() {
@@ -95,14 +83,6 @@ public class SysUser {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
-    }
-
-    public String getLastLoginTip() {
-        return lastLoginTip;
-    }
-
-    public void setLastLoginTip(String lastLoginTip) {
-        this.lastLoginTip = lastLoginTip == null ? null : lastLoginTip.trim();
     }
 
     public String getUserExtId() {
