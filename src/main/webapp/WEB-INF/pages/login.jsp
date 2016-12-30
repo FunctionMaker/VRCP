@@ -182,7 +182,7 @@
 					</div>
 				</div>
         	</div>
-            <div class="col-md-4 col-md-offset-3" s>
+            <div class="col-md-4 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">登录</h3>
@@ -212,7 +212,7 @@
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="登录" style="margin-top:25px"/>
                             </fieldset>
                         </form>
-                        <label style="text-align:center;font-size:16px;margin-top:20px;color:red">${errorInfo}</label>
+                        <label style="text-align:center;font-size:16px;margin-top:20px;color:red">${message}</label>
                     </div>
                 </div>
             </div>

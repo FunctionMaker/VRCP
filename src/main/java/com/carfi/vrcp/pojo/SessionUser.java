@@ -9,12 +9,21 @@ import java.util.List;
  */
 public class SessionUser {
 
+	/**id key*/
+	private String id;
 	/**当前用户信息*/
 	private SysUser user;
 	/**权限*/
 	private List<String> pers;
 	/**菜单*/
 	private List<SysMenu> menus;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public SysUser getUser() {
 		return user;
 	}

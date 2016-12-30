@@ -17,7 +17,7 @@
 		<!-- 认证成功统一跳转到first.action，建议不配置，shiro认证成功自动到上一个请求路径 -->
 		<property name="successUrl" value="/index"/>
 		<!-- 没有权限操作时的跳转页面 -->
-		<property name="unauthorizedUrl" value="/403.html" />
+		<property name="unauthorizedUrl" value="/403" />
 		<!-- 自定义filter配置 -->
 		<property name="filters">
 			<map>
@@ -76,7 +76,7 @@
 	<bean id="sessionManager"
 		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<!-- session的失效时长，单位毫秒 -->
-		<property name="globalSessionTimeout" value="600000" />
+		<property name="globalSessionTimeout" value="360000000" />
 		<!-- 删除失效的session -->
 		<property name="deleteInvalidSessions" value="true" />
 	</bean>

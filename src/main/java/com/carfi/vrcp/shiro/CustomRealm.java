@@ -1,10 +1,9 @@
 package com.carfi.vrcp.shiro;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.carfi.vrcp.pojo.SessionUser;
 import com.carfi.vrcp.pojo.SysMenu;
-import com.carfi.vrcp.pojo.SysPermission;
 import com.carfi.vrcp.pojo.SysRole;
 import com.carfi.vrcp.pojo.SysUser;
 import com.carfi.vrcp.service.sys.SysMenuService;
@@ -54,6 +52,7 @@ public class CustomRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		//super.doClearCache(principals);
 		// 获取用户身份信息
 		SessionUser sessionUser = (SessionUser) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
@@ -86,13 +85,19 @@ public class CustomRealm extends AuthorizingRealm {
 		}
 		SessionUser sessionUser = new SessionUser();
 		sessionUser.setUser(user);
+		sessionUser.setId(user.getUserId());
 		List<SysMenu> menus = menuService.queryByUserId(sessionUser.getUser().getUserId());
 		sessionUser.setMenus(menus);
 		// 认证用户
-		// 保存用户信息，即吧user类存储在shiro的session中
+		// 保存用户信息，即把user类存储在shiro的session中
 		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(sessionUser,
 				user.getPassword(), ByteSource.Util.bytes(user.getSalt()), this.getName());
 		return simpleAuthenticationInfo;
 	}
 
+	// 清除缓存
+	public void clearCached() {
+		PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
+		super.clearCache(principals);
+	}
 }

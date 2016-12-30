@@ -1,7 +1,5 @@
 package com.carfi.vrcp.controller;
 
-import java.util.List;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,16 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.carfi.vrcp.pojo.SessionUser;
-import com.carfi.vrcp.pojo.SysMenu;
 import com.carfi.vrcp.constant.Constant;
 import com.carfi.vrcp.util.CarfiUserUtil;
 import com.carfi.vrcp.util.VerifyCodeUtils;
@@ -61,8 +56,8 @@ public class LoginController {
 	 */
 	@RequestMapping("/index")
 	public String index(Model model){
-		List<SysMenu> mens = CarfiUserUtil.getMens();
-		 SessionUser sessionUser = CarfiUserUtil.getSessionUser();
+		//使doGetAuthorizationInfo执行
+		SecurityUtils.getSubject().hasRole("test");
 		model.addAttribute("menus",CarfiUserUtil.getMens());
 		return "index";
 	}
