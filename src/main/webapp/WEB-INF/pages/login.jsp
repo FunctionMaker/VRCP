@@ -48,11 +48,15 @@
 			border: 1px solid #cccccc;
 		}
 		td{
-			padding:8px; 
+			padding-left:10px; 
 			margin:10px; 
 		}
+		.vInputTd{
+			padding:0px; 
+			margin-left:0px; 
+		}
 		.panel{
-			margin-top: 200px;
+			margin-top: 160px;
 		}
 		.header{
 			border-bottom: 1px solid #d9d9d9;
@@ -75,7 +79,7 @@
 		    
 		}
 		.slideContainer{
-			margin-top: 180px;
+			margin-top: 125px;
 		}
 		.slideContent{
 			border-radius:20px;
@@ -86,6 +90,10 @@
 		}
 		#headLabel{
 			margin-left: 20px;
+		}
+		.btn{
+			color:white;
+			background-color: #00a1e9;
 		}
     </style>
     
@@ -158,7 +166,7 @@
 	
     <div class="container">
         <div class="row">
-        	<div class="col-md-5">
+        	<div class="col-md-5 col-md-offset-1">
         		<div class="slideContainer">
 			        <div id="adsCarousel" class="carousel">
 						<!-- 轮播（Carousel）指标 -->
@@ -169,20 +177,20 @@
 						</ol>   
 						<!-- 轮播（Carousel）项目 -->
 						<div class="carousel-inner animated slideContent">
-							<div class="item active fadeInRight">
+							<div class="item active fadeIn">
 								<img src="<%=path %>/ads/1.jpg" alt="First slide">
 							</div>
-							<div class="item animated fadeInRight">
+							<div class="item animated fadeIn">
 								<img src="<%=path %>/ads/2.jpg" alt="Second slide">
 							</div>
-							<div class="item animated fadeInRight">
+							<div class="item animated fadeIn">
 								<img src="<%=path %>/ads/3.jpg" alt="Third slide">
 							</div>
 						</div>
 					</div>
 				</div>
         	</div>
-            <div class="col-md-4 col-md-offset-3">
+            <div class="col-md-4 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">登录</h3>
@@ -196,10 +204,10 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="密码" name="password" value="${user.password}" type="password">
                                 </div>
-								 <div class="form-group">
+								 <div class="form-group" >
 					 				<table>
 					 					<tr>
-					 						<td>
+					 						<td class="vInputTd">
 					 							<input class="form-control" placeholder="验证码" name="verifyCode" type="text" style="width:100px">
 					 						</td>
 					 						<td>
@@ -209,10 +217,10 @@
 					 				</table>
 								 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="登录" style="margin-top:25px"/>
+                                <input type="submit" class="btn btn-lg btn-block" value="登录" style="margin-top:25px"/>
                             </fieldset>
                         </form>
-                        <label style="text-align:center;font-size:16px;margin-top:20px;color:red">${message}</label>
+                        <label style="color:#a94244">${message}</label>
                     </div>
                 </div>
             </div>

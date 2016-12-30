@@ -14,12 +14,9 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.carfi.vrcp.constant.Constant;
-import com.carfi.vrcp.pojo.SessionUser;
 import com.carfi.vrcp.util.CarfiUserUtil;
 import com.carfi.vrcp.util.VerifyCodeUtils;
 
