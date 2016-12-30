@@ -1,8 +1,12 @@
 package com.carfi.vrcp.controller;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -11,12 +15,11 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.carfi.vrcp.pojo.SessionUser;
-import com.carfi.vrcp.pojo.SysMenu;
+import com.carfi.vrcp.constant.Constant;
 import com.carfi.vrcp.util.CarfiUserUtil;
+import com.carfi.vrcp.util.VerifyCodeUtils;
 
 @Controller
 public class LoginController {
@@ -52,21 +55,43 @@ public class LoginController {
 	 */
 	@RequestMapping("/index")
 	public String index(Model model){
-		List<SysMenu> mens = CarfiUserUtil.getMens();
-		 SessionUser sessionUser = CarfiUserUtil.getSessionUser();
+		Subject currentUser = SecurityUtils.getSubject();
 		model.addAttribute("menus",CarfiUserUtil.getMens());
 		return "index";
 	}
+	
 	/**
-	 * 退出
-	 * @param attr
+	 * 创建验证码
+	 * @param response
+	 * @param session
+	 * @throws IOException
+	 */
+	@RequestMapping("/getVerifyCode")
+	public void getVerifyCode(HttpServletResponse response,HttpSession session) throws IOException{	
+		//创建四位验证码
+		String code = VerifyCodeUtils.generateVerifyCode(4).toLowerCase();
+		session.removeAttribute(Constant.VERIFY_CODE);
+		session.setAttribute(Constant.VERIFY_CODE, code);
+		VerifyCodeUtils.outputImage(100, 30, response.getOutputStream(), code);
+	}
+	
+	/**
+	 * 校验验证码
+	 * @param verifyCode
+	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(RedirectAttributes attr) {
-		// 使用权限管理 退出登录
-		SecurityUtils.getSubject().logout();
-		attr.addFlashAttribute("message", "您已安全退出");
-		return "";
+	@ResponseBody
+	@RequestMapping("/validVerifyCode")
+	public Map<String,Object> validVerifyCode(String verifyCode,HttpSession session){
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		if(verifyCode.toLowerCase().equals(session.getAttribute(Constant.VERIFY_CODE))){
+			resultMap.put("valid", true);
+			return resultMap;
+		}else{
+			resultMap = new HashMap<String,Object>();
+			resultMap.put("valid", false);
+		}
+		return resultMap;
 	}
 }

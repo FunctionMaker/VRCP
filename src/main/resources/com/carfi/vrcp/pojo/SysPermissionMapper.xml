@@ -9,15 +9,14 @@
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="VARCHAR" />
-    <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
     <result column="is_effective" property="isEffective" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    permission_id, name, per_type, percode, url,menu_id parent_id, sort, is_effective
+    permission_id, name, per_type, percode, url, parent_id, sort, is_effective
   </sql>
   <!-- 关联查询时使用 -->
   <sql id="p_Column_List" >
-    p.permission_id, p.name, p.per_type, p.percode, p.url, p.menu_id,p.parent_id, p.sort, p.is_effective
+    p.permission_id, p.name, p.per_type, p.percode, p.url, p.parent_id, p.sort, p.is_effective
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -31,10 +30,10 @@
   </delete>
   <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysPermission" >
     insert into sys_permission (permission_id, name, per_type, 
-      percode, url,menu_id, parent_id, 
+      percode, url, parent_id, 
       sort, is_effective)
     values (#{permissionId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{perType,jdbcType=VARCHAR}, 
-      #{percode,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},#{menuId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{percode,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
       #{sort,jdbcType=VARCHAR}, #{isEffective,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysPermission" >
@@ -61,9 +60,6 @@
       <if test="sort != null" >
         sort,
       </if>
-      <if test="menuId != null" >
-        menu_id,
-      </if>
       <if test="isEffective != null" >
         is_effective,
       </if>
@@ -83,9 +79,6 @@
       </if>
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="menuId != null" >
-        #{menuId,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
         #{parentId,jdbcType=VARCHAR},
@@ -113,9 +106,6 @@
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
       </if>
-       <if test="menuId != null" >
-        menu_id = #{menuId,jdbcType=VARCHAR},
-       </if>
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=VARCHAR},
       </if>
@@ -134,7 +124,6 @@
       per_type = #{perType,jdbcType=VARCHAR},
       percode = #{percode,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      menu_id = #{menuId,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=VARCHAR},
       is_effective = #{isEffective,jdbcType=BIT}
@@ -148,10 +137,10 @@
 	inner join sys_user u on u.role_id = rp.role_id
 	<where>
 		<if test="userId != null and userId != ''">
-			and u.user_id = #{userId,jdbcType=VARCHAR}
+			u.user_id = #{userId,jdbcType=VARCHAR}
 		</if>
 		<if test="perType != null and userId != ''">
-			and p.per_type = #{perType,jdbcType=VARCHAR}
+			p.per_type = #{perType,jdbcType=VARCHAR}
 		</if>
 	</where>
   </select>

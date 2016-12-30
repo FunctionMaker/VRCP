@@ -102,14 +102,14 @@
 	                        <!-- /input-group -->
 	                    </li>
 	                    <c:forEach items="${menus}" var="menu">
-	                    	<c:if test="${menu.parentId==null}">
+	                    	<c:if test="${menu.parent==null}">
 		                    	<li>
 		                        	<a href="${menu.url}"><i class="${menu.icon}"></i>${menu.name}
 		                        	<c:if test="${menu.hasSonNode}"><span class="fa arrow"></span></c:if>
 		                        	</a>
 		                        	 <ul class="nav nav-second-level" aria-expanded="false">
 		                        	 	<c:forEach items="${menus}" var="secondMenu">
-		                     				<c:if test="${secondMenu.parentId==menu.menuId}">
+		                     				<c:if test="${secondMenu.parent.id==menu.id}">
 		                     					<li>
 		                                    		<a href="#">${secondMenu.name}</a>
 		                                		</li>

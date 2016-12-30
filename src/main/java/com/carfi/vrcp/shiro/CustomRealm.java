@@ -55,17 +55,17 @@ public class CustomRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// 获取用户身份信息
-		SessionUser sessionUser = (SessionUser) principals.getPrimaryPrincipal();
+		SessionUser sessinoUser = (SessionUser) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 		// TODO 设置用户登录时间与登录ip
 		//从数据中获取权限与菜单
-		List<String> pers = permissionService.queryPerCodeByUserId(sessionUser.getUser().getUserId());
-		sessionUser.setPers(pers);
+		List<String> pers = permissionService.queryPerCodeByUserId(sessinoUser.getUser().getUserId());
+		sessinoUser.setPers(pers);
 		simpleAuthorizationInfo.addStringPermissions(pers);
-		List<SysMenu> menus = menuService.queryByUserId(sessionUser.getUser().getUserId());
-		sessionUser.setMenus(menus);
-		if(StringUtils.isNotBlank(sessionUser.getUser().getRoleId())){
-			SysRole role = roleService.queryById(sessionUser.getUser().getRoleId());
+		List<SysMenu> menus = menuService.queryByUserId(sessinoUser.getUser().getUserId());
+		sessinoUser.setMenus(menus);
+		if(StringUtils.isNotBlank(sessinoUser.getUser().getRoleId())){
+			SysRole role = roleService.queryById(sessinoUser.getUser().getRoleId());
 			simpleAuthorizationInfo.addRole(role.getName());
 		}
 		return simpleAuthorizationInfo;
@@ -86,8 +86,6 @@ public class CustomRealm extends AuthorizingRealm {
 		}
 		SessionUser sessionUser = new SessionUser();
 		sessionUser.setUser(user);
-		List<SysMenu> menus = menuService.queryByUserId(sessionUser.getUser().getUserId());
-		sessionUser.setMenus(menus);
 		// 认证用户
 		// 保存用户信息，即吧user类存储在shiro的session中
 		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(sessionUser,

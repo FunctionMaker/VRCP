@@ -38,7 +38,8 @@
 					/user/del.html = perms[user:del:*] /user/update.html = perms[user:update:*] -->
 				<!-- anno 匿名访问 /** 所有的 -->
 				<!-- /** = authc -->
-				/validatecode.jsp = anon
+				/getVerifyCode = anon
+				/validVerifyCode = anon
 				/bootstrapValidator/** = anon
 				/cityselect/** = anon
 				/css/** = anon
@@ -47,6 +48,7 @@
 				/js/** = anon
 				/layer/** = anon
 				/vendor/** = anon
+				/ads/** = anon
 				/** = authc
 			</value>
 		</property>
