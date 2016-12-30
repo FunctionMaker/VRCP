@@ -5,6 +5,8 @@ import java.util.Date;
 public class SysUser {
     private String userId;
 
+    private String roleId;
+
     private String organizationId;
 
     private String username;
@@ -25,6 +27,14 @@ public class SysUser {
 
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 
     public String getOrganizationId() {
