@@ -7,13 +7,9 @@ public class OrgUserExt {
 
     private String phone;
 
-    private String createBycarfi;
-
     private String createBy;
 
     private Integer terminalNum;
-
-    private Boolean isEffective;
 
     public String getUserExtId() {
         return userExtId;
@@ -39,14 +35,6 @@ public class OrgUserExt {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getCreateBycarfi() {
-        return createBycarfi;
-    }
-
-    public void setCreateBycarfi(String createBycarfi) {
-        this.createBycarfi = createBycarfi == null ? null : createBycarfi.trim();
-    }
-
     public String getCreateBy() {
         return createBy;
     }
@@ -61,13 +49,5 @@ public class OrgUserExt {
 
     public void setTerminalNum(Integer terminalNum) {
         this.terminalNum = terminalNum;
-    }
-
-    public Boolean getIsEffective() {
-        return isEffective;
-    }
-
-    public void setIsEffective(Boolean isEffective) {
-        this.isEffective = isEffective;
     }
 }

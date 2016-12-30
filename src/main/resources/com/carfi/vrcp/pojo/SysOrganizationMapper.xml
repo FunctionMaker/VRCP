@@ -1,38 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carfi.vrcp.dao.SysOrganizationMapper">
-  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysOrganization">
-    <id column="organization_id" jdbcType="VARCHAR" property="organizationId" />
-    <result column="alias" jdbcType="VARCHAR" property="alias" />
-    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
-    <result column="contact_man" jdbcType="VARCHAR" property="contactMan" />
-    <result column="contact_tel" jdbcType="VARCHAR" property="contactTel" />
-    <result column="fixed_tel" jdbcType="VARCHAR" property="fixedTel" />
-    <result column="spare_contact" jdbcType="VARCHAR" property="spareContact" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="terminal_num" jdbcType="INTEGER" property="terminalNum" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="has_son_node" jdbcType="BIT" property="hasSonNode" />
-    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
-    <result column="is_effective" jdbcType="BIT" property="isEffective" />
-    <result column="level" jdbcType="INTEGER" property="level" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carfi.vrcp.mapper.SysOrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysOrganization" >
+    <id column="organization_id" property="organizationId" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="contact_man" property="contactMan" jdbcType="VARCHAR" />
+    <result column="contact_tel" property="contactTel" jdbcType="VARCHAR" />
+    <result column="fixed_tel" property="fixedTel" jdbcType="VARCHAR" />
+    <result column="spare_contact" property="spareContact" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="terminal_num" property="terminalNum" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="has_son_node" property="hasSonNode" jdbcType="BIT" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="is_effective" property="isEffective" jdbcType="BIT" />
+    <result column="level" property="level" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     organization_id, alias, full_name, contact_man, contact_tel, fixed_tel, spare_contact, 
     email, address, terminal_num, remark, has_son_node, parent_id, is_effective, level
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sys_organization
     where organization_id = #{organizationId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_organization
     where organization_id = #{organizationId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysOrganization">
+  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysOrganization" >
     insert into sys_organization (organization_id, alias, full_name, 
       contact_man, contact_tel, fixed_tel, 
       spare_contact, email, address, 
@@ -46,152 +46,152 @@
       #{parentId,jdbcType=VARCHAR}, #{isEffective,jdbcType=BIT}, #{level,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysOrganization">
+  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysOrganization" >
     insert into sys_organization
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="organizationId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="organizationId != null" >
         organization_id,
       </if>
-      <if test="alias != null">
+      <if test="alias != null" >
         alias,
       </if>
-      <if test="fullName != null">
+      <if test="fullName != null" >
         full_name,
       </if>
-      <if test="contactMan != null">
+      <if test="contactMan != null" >
         contact_man,
       </if>
-      <if test="contactTel != null">
+      <if test="contactTel != null" >
         contact_tel,
       </if>
-      <if test="fixedTel != null">
+      <if test="fixedTel != null" >
         fixed_tel,
       </if>
-      <if test="spareContact != null">
+      <if test="spareContact != null" >
         spare_contact,
       </if>
-      <if test="email != null">
+      <if test="email != null" >
         email,
       </if>
-      <if test="address != null">
+      <if test="address != null" >
         address,
       </if>
-      <if test="terminalNum != null">
+      <if test="terminalNum != null" >
         terminal_num,
       </if>
-      <if test="remark != null">
+      <if test="remark != null" >
         remark,
       </if>
-      <if test="hasSonNode != null">
+      <if test="hasSonNode != null" >
         has_son_node,
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         parent_id,
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         is_effective,
       </if>
-      <if test="level != null">
+      <if test="level != null" >
         level,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="organizationId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="organizationId != null" >
         #{organizationId,jdbcType=VARCHAR},
       </if>
-      <if test="alias != null">
+      <if test="alias != null" >
         #{alias,jdbcType=VARCHAR},
       </if>
-      <if test="fullName != null">
+      <if test="fullName != null" >
         #{fullName,jdbcType=VARCHAR},
       </if>
-      <if test="contactMan != null">
+      <if test="contactMan != null" >
         #{contactMan,jdbcType=VARCHAR},
       </if>
-      <if test="contactTel != null">
+      <if test="contactTel != null" >
         #{contactTel,jdbcType=VARCHAR},
       </if>
-      <if test="fixedTel != null">
+      <if test="fixedTel != null" >
         #{fixedTel,jdbcType=VARCHAR},
       </if>
-      <if test="spareContact != null">
+      <if test="spareContact != null" >
         #{spareContact,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
+      <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="address != null">
+      <if test="address != null" >
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="terminalNum != null">
+      <if test="terminalNum != null" >
         #{terminalNum,jdbcType=INTEGER},
       </if>
-      <if test="remark != null">
+      <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="hasSonNode != null">
+      <if test="hasSonNode != null" >
         #{hasSonNode,jdbcType=BIT},
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         #{parentId,jdbcType=VARCHAR},
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         #{isEffective,jdbcType=BIT},
       </if>
-      <if test="level != null">
+      <if test="level != null" >
         #{level,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysOrganization">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysOrganization" >
     update sys_organization
-    <set>
-      <if test="alias != null">
+    <set >
+      <if test="alias != null" >
         alias = #{alias,jdbcType=VARCHAR},
       </if>
-      <if test="fullName != null">
+      <if test="fullName != null" >
         full_name = #{fullName,jdbcType=VARCHAR},
       </if>
-      <if test="contactMan != null">
+      <if test="contactMan != null" >
         contact_man = #{contactMan,jdbcType=VARCHAR},
       </if>
-      <if test="contactTel != null">
+      <if test="contactTel != null" >
         contact_tel = #{contactTel,jdbcType=VARCHAR},
       </if>
-      <if test="fixedTel != null">
+      <if test="fixedTel != null" >
         fixed_tel = #{fixedTel,jdbcType=VARCHAR},
       </if>
-      <if test="spareContact != null">
+      <if test="spareContact != null" >
         spare_contact = #{spareContact,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
+      <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="address != null">
+      <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="terminalNum != null">
+      <if test="terminalNum != null" >
         terminal_num = #{terminalNum,jdbcType=INTEGER},
       </if>
-      <if test="remark != null">
+      <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="hasSonNode != null">
+      <if test="hasSonNode != null" >
         has_son_node = #{hasSonNode,jdbcType=BIT},
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=VARCHAR},
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         is_effective = #{isEffective,jdbcType=BIT},
       </if>
-      <if test="level != null">
+      <if test="level != null" >
         level = #{level,jdbcType=INTEGER},
       </if>
     </set>
     where organization_id = #{organizationId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysOrganization">
+  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysOrganization" >
     update sys_organization
     set alias = #{alias,jdbcType=VARCHAR},
       full_name = #{fullName,jdbcType=VARCHAR},

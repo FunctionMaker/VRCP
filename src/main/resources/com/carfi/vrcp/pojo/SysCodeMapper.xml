@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carfi.vrcp.mapper.SysCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysCode" >
+    <id column="code_id" property="codeId" jdbcType="VARCHAR" />
+    <result column="code_type_id" property="codeTypeId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    code_id, code_type_id, name, code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_code
+    where code_id = #{codeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_code
+    where code_id = #{codeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysCode" >
+    insert into sys_code (code_id, code_type_id, name, 
+      code)
+    values (#{codeId,jdbcType=VARCHAR}, #{codeTypeId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysCode" >
+    insert into sys_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="codeId != null" >
+        code_id,
+      </if>
+      <if test="codeTypeId != null" >
+        code_type_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="codeId != null" >
+        #{codeId,jdbcType=VARCHAR},
+      </if>
+      <if test="codeTypeId != null" >
+        #{codeTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysCode" >
+    update sys_code
+    <set >
+      <if test="codeTypeId != null" >
+        code_type_id = #{codeTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where code_id = #{codeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysCode" >
+    update sys_code
+    set code_type_id = #{codeTypeId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR}
+    where code_id = #{codeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

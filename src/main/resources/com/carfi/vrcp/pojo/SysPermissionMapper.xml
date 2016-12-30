@@ -1,127 +1,127 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carfi.vrcp.dao.SysPermissionMapper">
-  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysPermission">
-    <id column="permission_id" jdbcType="VARCHAR" property="permissionId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="per_type" jdbcType="INTEGER" property="perType" />
-    <result column="percode" jdbcType="VARCHAR" property="percode" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="is_effective" jdbcType="BIT" property="isEffective" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carfi.vrcp.mapper.SysPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysPermission" >
+    <id column="permission_id" property="permissionId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="per_type" property="perType" jdbcType="VARCHAR" />
+    <result column="percode" property="percode" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="VARCHAR" />
+    <result column="is_effective" property="isEffective" jdbcType="BIT" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     permission_id, name, per_type, percode, url, parent_id, sort, is_effective
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sys_permission
     where permission_id = #{permissionId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_permission
     where permission_id = #{permissionId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysPermission">
+  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysPermission" >
     insert into sys_permission (permission_id, name, per_type, 
       percode, url, parent_id, 
       sort, is_effective)
-    values (#{permissionId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{perType,jdbcType=INTEGER}, 
+    values (#{permissionId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{perType,jdbcType=VARCHAR}, 
       #{percode,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=INTEGER}, #{isEffective,jdbcType=BIT})
+      #{sort,jdbcType=VARCHAR}, #{isEffective,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysPermission">
+  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysPermission" >
     insert into sys_permission
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="permissionId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permissionId != null" >
         permission_id,
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         name,
       </if>
-      <if test="perType != null">
+      <if test="perType != null" >
         per_type,
       </if>
-      <if test="percode != null">
+      <if test="percode != null" >
         percode,
       </if>
-      <if test="url != null">
+      <if test="url != null" >
         url,
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         parent_id,
       </if>
-      <if test="sort != null">
+      <if test="sort != null" >
         sort,
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         is_effective,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="permissionId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permissionId != null" >
         #{permissionId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="perType != null">
-        #{perType,jdbcType=INTEGER},
+      <if test="perType != null" >
+        #{perType,jdbcType=VARCHAR},
       </if>
-      <if test="percode != null">
+      <if test="percode != null" >
         #{percode,jdbcType=VARCHAR},
       </if>
-      <if test="url != null">
+      <if test="url != null" >
         #{url,jdbcType=VARCHAR},
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         #{parentId,jdbcType=VARCHAR},
       </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
+      <if test="sort != null" >
+        #{sort,jdbcType=VARCHAR},
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         #{isEffective,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysPermission">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysPermission" >
     update sys_permission
-    <set>
-      <if test="name != null">
+    <set >
+      <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="perType != null">
-        per_type = #{perType,jdbcType=INTEGER},
+      <if test="perType != null" >
+        per_type = #{perType,jdbcType=VARCHAR},
       </if>
-      <if test="percode != null">
+      <if test="percode != null" >
         percode = #{percode,jdbcType=VARCHAR},
       </if>
-      <if test="url != null">
+      <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
       </if>
-      <if test="parentId != null">
+      <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=VARCHAR},
       </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=VARCHAR},
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         is_effective = #{isEffective,jdbcType=BIT},
       </if>
     </set>
     where permission_id = #{permissionId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysPermission">
+  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysPermission" >
     update sys_permission
     set name = #{name,jdbcType=VARCHAR},
-      per_type = #{perType,jdbcType=INTEGER},
+      per_type = #{perType,jdbcType=VARCHAR},
       percode = #{percode,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=VARCHAR},
       is_effective = #{isEffective,jdbcType=BIT}
     where permission_id = #{permissionId,jdbcType=VARCHAR}
   </update>

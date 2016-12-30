@@ -1,70 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carfi.vrcp.dao.SysRoleMapper">
-  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysRole">
-    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="is_effective" jdbcType="BIT" property="isEffective" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carfi.vrcp.mapper.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysRole" >
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="organization_id" property="organizationId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="is_effective" property="isEffective" jdbcType="BIT" />
   </resultMap>
-  <sql id="Base_Column_List">
-    role_id, name, is_effective
+  <sql id="Base_Column_List" >
+    role_id, organization_id, name, is_effective
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sys_role
     where role_id = #{roleId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_role
     where role_id = #{roleId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysRole">
-    insert into sys_role (role_id, name, is_effective
-      )
-    values (#{roleId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{isEffective,jdbcType=BIT}
-      )
+  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysRole" >
+    insert into sys_role (role_id, organization_id, name, 
+      is_effective)
+    values (#{roleId,jdbcType=VARCHAR}, #{organizationId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{isEffective,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysRole">
+  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysRole" >
     insert into sys_role
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="roleId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
         role_id,
       </if>
-      <if test="name != null">
+      <if test="organizationId != null" >
+        organization_id,
+      </if>
+      <if test="name != null" >
         name,
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         is_effective,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="roleId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
         #{roleId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         #{isEffective,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysRole">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysRole" >
     update sys_role
-    <set>
-      <if test="name != null">
+    <set >
+      <if test="organizationId != null" >
+        organization_id = #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="isEffective != null">
+      <if test="isEffective != null" >
         is_effective = #{isEffective,jdbcType=BIT},
       </if>
     </set>
     where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysRole">
+  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysRole" >
     update sys_role
-    set name = #{name,jdbcType=VARCHAR},
+    set organization_id = #{organizationId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       is_effective = #{isEffective,jdbcType=BIT}
     where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
