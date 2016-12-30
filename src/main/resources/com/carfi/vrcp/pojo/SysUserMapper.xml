@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carfi.vrcp.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysUser">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="organization_id" jdbcType="VARCHAR" property="organizationId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="is_effective" jdbcType="BIT" property="isEffective" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="user_ext_id" jdbcType="VARCHAR" property="userExtId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, organization_id, username, password, user_type, is_effective, last_login_time, 
+    user_ext_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysUser">
+    insert into sys_user (user_id, organization_id, username, 
+      password, user_type, is_effective, 
+      last_login_time, user_ext_id)
+    values (#{userId,jdbcType=VARCHAR}, #{organizationId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, #{isEffective,jdbcType=BIT}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{userExtId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="organizationId != null">
+        organization_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="isEffective != null">
+        is_effective,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="userExtId != null">
+        user_ext_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null">
+        #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null">
+        #{isEffective,jdbcType=BIT},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userExtId != null">
+        #{userExtId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysUser">
+    update sys_user
+    <set>
+      <if test="organizationId != null">
+        organization_id = #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null">
+        is_effective = #{isEffective,jdbcType=BIT},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userExtId != null">
+        user_ext_id = #{userExtId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysUser">
+    update sys_user
+    set organization_id = #{organizationId,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER},
+      is_effective = #{isEffective,jdbcType=BIT},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      user_ext_id = #{userExtId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.carfi.vrcp.pojo.SysUser">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="organization_id" jdbcType="VARCHAR" property="organizationId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="is_effective" jdbcType="BIT" property="isEffective" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="user_ext_id" jdbcType="VARCHAR" property="userExtId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, organization_id, username, password, user_type, is_effective, last_login_time, 
+    user_ext_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.carfi.vrcp.pojo.SysUser">
+    insert into sys_user (user_id, organization_id, username, 
+      password, user_type, is_effective, 
+      last_login_time, user_ext_id)
+    values (#{userId,jdbcType=VARCHAR}, #{organizationId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, #{isEffective,jdbcType=BIT}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{userExtId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carfi.vrcp.pojo.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="organizationId != null">
+        organization_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="isEffective != null">
+        is_effective,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="userExtId != null">
+        user_ext_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null">
+        #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null">
+        #{isEffective,jdbcType=BIT},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userExtId != null">
+        #{userExtId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carfi.vrcp.pojo.SysUser">
+    update sys_user
+    <set>
+      <if test="organizationId != null">
+        organization_id = #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null">
+        is_effective = #{isEffective,jdbcType=BIT},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userExtId != null">
+        user_ext_id = #{userExtId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carfi.vrcp.pojo.SysUser">
+    update sys_user
+    set organization_id = #{organizationId,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER},
+      is_effective = #{isEffective,jdbcType=BIT},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      user_ext_id = #{userExtId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

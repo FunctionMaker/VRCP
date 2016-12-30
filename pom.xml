@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.carfi</groupId>
-  <artifactId>vrcpv2</artifactId>
+  <artifactId>vrcp</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>vrcp Maven Webapp</name>
@@ -183,7 +183,7 @@
     </dependency>
 	</dependencies>
   <build>
-    <finalName>vrcpv2</finalName>
+    <finalName>vrcp</finalName>
      <plugins>  
     <plugin>  
       <groupId>org.apache.maven.plugins</groupId>  
