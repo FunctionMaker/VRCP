@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carfi.vrcp.dao.sondao.OrgRoleDao">
+
+	<resultMap type="OrgRole" id="orgRoleResultMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="org_id" property="orgId"/>
+	</resultMap>
+	<sql id="commonsql">
+		
+	</sql>
+	<!-- 根据组织id查询角色 -->
+	<select id="queryAllByOrgId" parameterType="Long" resultMap="orgRoleResultMap">
+		SELECT ID,NAME,ORG_ID 
+		FROM T_ORG_ROLE 
+		WHERE (ORG_ID = #{orgId} OR ORG_ID IS NULL ) AND ID != 1
+	</select>
+	
+	<select id="queryByOrgIdAndId" parameterType="java.util.Map" resultMap="orgRoleResultMap">
+		SELECT ID,NAME,ORG_ID 
+		FROM T_ORG_ROLE 
+		WHERE (ORG_ID = #{orgId} OR ORG_ID IS NULL) AND ID = #{roleId}
+	</select>
+	
+	<!-- 查询总数 -->
+	<select id="queryCount">
+		SELECT COUNT(ID) 
+		FROM T_ORG_ROLE
+	</select>
+	
+	<!-- 添加角色信息 -->
+	<insert id="addRole" useGeneratedKeys="true" keyProperty="id" parameterType="com.carfi.vrcp.pojo.OrgRole">
+		INSERT INTO T_ORG_ROLE (NAME,ORG_ID) VALUES (#{name},#{orgId})
+	</insert>
+	
+	<!-- 删除角色信息 -->
+	<delete id="delete" parameterType="Long">
+		DELETE FROM T_ORG_ROLE WHERE ID = #{id}
+	</delete>
+	
+	<!-- 保存角色权限 -->
+	<insert id="addRolePermission" parameterType="java.util.Map">
+		INSERT INTO T_ORGROLE_ORGPERMISSION (ORG_ROLE_ID,ORG_PERMISSION_ID) VALUES (#{roleId},#{permissionId})
+	</insert>
+	
+	<!-- 删除角色权限 -->
+	<delete id="deleteRolePermission" parameterType="Long">
+		DELETE FROM T_ORGROLE_ORGPERMISSION WHERE ORG_ROLE_ID = #{roleId}
+	</delete>
+	
+	<!-- 修改组织角色信息 -->
+	<update id="updateById" parameterType="com.carfi.vrcp.pojo.OrgRole">
+		UPDATE T_ORG_ROLE SET NAME = #{name} WHERE ID = #{id}
+	</update>
+	
+</mapper>

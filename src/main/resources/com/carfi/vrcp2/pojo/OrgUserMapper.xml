@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carfi.vrcp.dao.sondao.OrgUserDao">
+
+	<resultMap type="OrgUser" id="userResultMap">
+		<id column="userid" property="id"/>
+		<result column="account_name" property="accountName"/>
+		<result column="password" property="password"/>
+		<result column="manager" property="manager"/>
+		<result column="phone" property="phone"/>
+		<result column="terminal_num" property="terminalNum"/>
+		<result column="last_login_time" property="lastLoginTime"/>
+		<result column="create_bycarfi" property="createByCarfi"/>
+		<result column="is_effective_user" property="isEffective"/>
+		<association property="createBy" javaType="OrgUser">
+			<id column="parentid" property="id"/>
+			<result column="parent_accountname" property="accountName"/>
+		</association>
+		<association property="organization" javaType="Organization">
+			<id column="orgid" property="id"/>
+			<result column="alias" property="alias"/>
+			<result column="fullName" property="fullName"/>
+			<result column="contact_man" property="contactMan"/>
+			<result column="contact_tel" property="contactTel"/>
+			<result column="fixed_tel" property="fixedTel"/>
+			<result column="spare_contact" property="spareContact"/>
+			<result column="email" property="email"/>
+			<result column="address" property="address"/>
+			<result column="terminal_num" property="terminalNum"/>
+			<result column="remark" property="remark"/>
+			<result column="has_son_node" property="hasSonNode"/>
+			<result column="is_effective" property="isEffective"/>
+			<result column="level" property="level"/>
+			<result column="has_son_node" property="hasSonNode"/>
+		</association>
+		<association property="orgRole" javaType="OrgRole">
+			<id column="roleid" property="id"/>
+			<result column="name" property="name"/>
+		</association>
+	</resultMap>
+	
+	<sql id="common">
+		select org_user.id userid,org_user.account_name account_name,org_user.password password,org_user.manager manager,org_user.phone phone,
+		org_user.terminal_num terminal_num,org_user.last_login_time last_login_time,org_user.create_bycarfi create_bycarfi,org_user.is_effective is_effective_user,
+		org.id orgid,org.alias alias , org.full_name fullName,
+		role.id roleid, role.name name,
+		org_user2.id parentid ,org_user2.account_name parent_accountname
+		from t_org_user org_user 
+		left join t_organization org on org_id=org.id 
+		left join t_org_role role on role_id=role.id
+		left join t_org_user org_user2 on org_user.create_by=org_user2.id
+	</sql>
+	
+	<!-- 插入组织用户 -->
+	<insert id="save" parameterType="OrgUser" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+ 		insert into t_org_user(account_name,password,manager,phone,create_bycarfi,create_by,terminal_num,last_login_time,org_id,role_id)
+ 		 values(#{accountName},#{password},#{manager},#{phone},#{createByCarfi},#{createBy.id},#{terminalNum},#{lastLoginTime},#{organization.id},#{orgRole.id});
+ 	</insert>
+ 	<!-- 根据用户id删除用户 -->
+ 	<delete id="delete" parameterType="long">
+ 		delete from t_org_user where id=#{param1} and (terminal_num=0 or terminal_num is null);
+ 	</delete>
+ 	<!-- 更改 -->
+	<update id="update" parameterType="OrgUser">
+		 update t_org_user set
+		account_name=#{accountName},password=#{password},manager=#{manager},phone=#{phone},role_id=#{orgRole.id} where id=#{id}; 
+	</update>
+	<!-- 登陆时的查询 -->
+	<select id="queryLogin" resultMap="userResultMap">
+		<include refid="common"/> where org_user.account_name=#{param1} and org_user.password=#{param2} and org.is_effective=1 ;
+	</select>
+	<!-- 根据组织id查询组织超级管理员 -->
+	<select id="queryOneByOrgId" parameterType="long" resultMap="userResultMap" >
+		<include refid="common"/> where org.id=#{param1} and role.id=1;
+	</select>
+	<!-- 更新用户登录时间 -->
+	<update id="updateLoginTime" parameterType="OrgUser">
+		update t_org_user set last_login_time=#{lastLoginTime} where id=#{id};
+	</update>
+	<!-- 根据组织id查询用户总记录数 -->
+	<select id="queryCountByOrgId"  resultType="int">
+		select count(*) from t_org_user where org_id=#{param1} and role_id!=1;
+	</select>
+	<!-- 复杂查询用户总记录数 -->
+	<select id="queryCountByQuery" parameterType="OrgUserQuery" resultType="int">
+		select count(*) from t_org_user where org_id=#{orgId} 
+		<if test="name!=null">
+			and manager like concat('%',#{name},'%') 
+		</if>
+		and role_id!=1;
+	</select>
+	<!-- 复杂查询用户数据 -->
+	<select id="queryDataByQuery" parameterType="OrgUserQuery" resultMap="userResultMap">
+		<include refid="common"/> where org.id=#{orgId}
+		<if test="name!=null">
+			and org_user.manager like concat('%',#{name},'%') 
+		</if>
+		and role.id!=1
+		limit #{beginIndex},#{pageNum};
+	</select>
+	<!-- 根据账号查询该用户是否存在 -->
+	<select id="queryOrgUserByAccount" parameterType="String" resultMap="userResultMap">
+		<include refid="common"/> where org_user.account_name=#{param1};
+	</select>
+	<!-- 根据用户id查询用户 -->
+	<select id="queryOne" resultMap="userResultMap">
+		<include refid="common"/> where org_user.id=#{param1};
+	</select>
+	<!-- 根据组织id，将该组织的的用户的is_effective设置为false -->
+	<update id="updAll" parameterType="long">
+		update t_org_user set is_effective="0" where org_id=#{param1};
+	</update>
+	
+</mapper>

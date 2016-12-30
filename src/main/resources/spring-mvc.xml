@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:context="http://www.springframework.org/schema/context" 
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="  
+       http://www.springframework.org/schema/context  
+       http://www.springframework.org/schema/context/spring-context.xsd  
+       http://www.springframework.org/schema/beans  
+       http://www.springframework.org/schema/beans/spring-beans.xsd  
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd  
+     "> 
+ 
+   <context:component-scan base-package="com.carfi.vrcp.controller" ></context:component-scan>  
+   <context:component-scan base-package="com.carfi.vrcp.service" ></context:component-scan>  
+     
+   <!-- 默认的注解映射的支持 -->  
+   <mvc:annotation-driven />  
+     
+   <!-- 视图解释类 -->  
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+    <property name="prefix" value="/WEB-INF/pages/"/>  
+    <property name="suffix" value=".jsp"/><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑  -->  
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />  
+   </bean>  
+     
+    <mvc:interceptors> 
+    	<mvc:interceptor>
+    		<mvc:mapping path="/carfi/**"/>
+    		<mvc:exclude-mapping path="/carfi/login/**"/>
+    		<mvc:exclude-mapping path="/vendor/**"/>
+    		<mvc:exclude-mapping path="/js/**"/>
+    		<mvc:exclude-mapping path="/dist/**"/>
+    		<mvc:exclude-mapping path="/bootstrapValidator/**"/>
+    		<bean class="com.carfi.vrcp2.interceptor.LoginInterceptor" /> 
+    	</mvc:interceptor>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/org/**"/>
+    		<mvc:exclude-mapping path="/org/login/**"/>
+    		<mvc:exclude-mapping path="/vendor/**"/>
+    		<mvc:exclude-mapping path="/js/**"/>
+    		<mvc:exclude-mapping path="/dist/**"/>
+    		<mvc:exclude-mapping path="/layer/**"/>
+    		<mvc:exclude-mapping path="/bootstrapValidator/**"/>
+    		<bean class="com.carfi.vrcp2.interceptor.OrgLoginInterceptor" /> 
+    	</mvc:interceptor>
+	</mvc:interceptors>       
+  
+    <!-- 对静态资源文件的访问  -->  
+    <mvc:default-servlet-handler/>
+</beans> 

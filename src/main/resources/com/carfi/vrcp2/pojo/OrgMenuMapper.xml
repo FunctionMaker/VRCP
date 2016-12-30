@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carfi.vrcp.dao.sondao.OrgMenuDao">
+
+	<resultMap type="OrgMenu" id="orgMenuResultMap">
+		<id column="menuId" property="id"/>
+		<result column="menuName" property="name"/>
+		<result column="menuIcon" property="icon"/>
+		<result column="menuUrl" property="url"/>
+		<result column="menuHasSonNode" property="hasSonNode"/>
+		<association property="parent" javaType="Menu">
+			<id column="parentId" property="id"/>
+			<result column="parentName" property="name"/>
+			<result column="parentIcon" property="icon"/>
+			<result column="parentUrl" property="url"/>
+			<result column="parentHasSonNode" property="hasSonNode"/>
+		</association>
+	</resultMap>
+	
+	<select id="queryAllByQuery" parameterType="MenuQuery" resultMap="orgMenuResultMap">
+		select menu.id menuId,menu.name menuName,menu.icon menuIcon,menu.url menuUrl,menu.has_son_node menuHasSonNode,
+		parent.id parentId,parent.name parentName,parent.icon parentIcon,parent.url parentUrl,parent.has_son_node parentHasSonNode
+		from t_org_menu menu left join t_org_menu parent on menu.parent_id = parent.id where
+		<if test="parentId == null">
+			menu.parent_id=0
+		</if>
+		<if test="parentId != null">
+			menu.parent_id=#{parentId}
+		</if>
+		and menu.role_id=#{roleId};
+	</select>
+	
+</mapper>

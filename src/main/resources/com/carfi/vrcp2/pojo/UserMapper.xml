@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carfi.vrcp.dao.sondao.UserDao">
+
+	<resultMap type="User" id="userResultMap">
+		<id column="userId" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="last_login_time" property="lastLoginTime"/>
+		<association property="role" javaType="Role">
+			<id column="roleId" property="id"/>
+			<result column="roleName" property="name"/>
+		</association>
+	</resultMap>
+	
+	<sql id="selectSql">
+		select 
+ 		 user.id userId,username,password,last_login_time,
+ 		 role.id roleId,role.name roleName
+ 		 from t_user user left join t_role role on role_id=role.id
+	</sql>
+	
+ 	<insert id="save" parameterType="User" >
+ 		insert into t_user(username,password,last_login_time) values(#{username},#{password},#{lastLoginTime});
+ 	</insert>
+ 	
+ 	<delete id="delete" parameterType="long">
+ 		delete from t_user where id=#{id};
+ 	</delete>
+ 	
+ 	<update id="update" parameterType="User">
+ 		update t_user set username=#{username},password=#{password},last_login_time=#{lastLoginTime} where id=#{id}
+ 	</update>
+ 	
+ 	<select id="queryOne" parameterType="long" resultMap="userResultMap">
+ 		 <include refid="selectSql"/> where user.id=#{id};
+ 	</select>
+ 	
+ 	<select id="queryAll" parameterType="long" resultMap="userResultMap">
+ 		<include refid="selectSql"/>
+ 	</select>
+ 	
+ 	<select id="queryOneByName" parameterType="string" resultMap="userResultMap">
+ 		<include refid="selectSql"/> where username=#{username};
+ 	</select>
+</mapper>
