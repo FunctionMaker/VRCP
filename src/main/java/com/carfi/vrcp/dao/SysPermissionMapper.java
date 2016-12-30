@@ -1,5 +1,9 @@
 package com.carfi.vrcp.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.carfi.vrcp.pojo.SysPermission;
 
 public interface SysPermissionMapper {
@@ -14,4 +18,13 @@ public interface SysPermissionMapper {
     int updateByPrimaryKeySelective(SysPermission record);
 
     int updateByPrimaryKey(SysPermission record);
+
+    /**
+     * 获取权限列表
+     * @param userId 用户id
+     * @param perType 权限类型
+     * @return
+     */
+	List<SysPermission> selectByUserId(@Param("userId")String userId, @Param("perType")String perType);
+
 }

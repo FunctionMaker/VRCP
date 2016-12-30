@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,9 +14,17 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.carfi.vrcp.pojo.SessionUser;
+import com.carfi.vrcp.pojo.SysMenu;
+import com.carfi.vrcp.pojo.SysPermission;
+import com.carfi.vrcp.pojo.SysRole;
 import com.carfi.vrcp.pojo.SysUser;
+import com.carfi.vrcp.service.sys.SysMenuService;
+import com.carfi.vrcp.service.sys.SysPermissionService;
+import com.carfi.vrcp.service.sys.SysRoleService;
+import com.carfi.vrcp.service.sys.SysUserService;
 
 /**
  * 自定义的Realm
@@ -26,6 +35,15 @@ import com.carfi.vrcp.pojo.SysUser;
  */
 public class CustomRealm extends AuthorizingRealm {
 
+	@Autowired
+	private SysUserService userService;
+	@Autowired
+	private SysPermissionService permissionService;
+	@Autowired
+	private SysMenuService menuService;
+	@Autowired
+	private SysRoleService roleService;
+	
 	@Override
 	public String getName() {
 		return "customRealm";
@@ -37,19 +55,19 @@ public class CustomRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// 获取用户身份信息
-		SessionUser user = (SessionUser) principals.getPrimaryPrincipal();
+		SessionUser sessinoUser = (SessionUser) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-		// 从数据中获取权限
-//		List<String> permissions = roleService.getPermissionByUsername(user.getUsername());
-//		// 查到权限数据，返回授权信息
-//		simpleAuthorizationInfo.addStringPermissions(permissions);
-//		// 保存用户角色
-//		List<TbRole> roles_ = roleService.getRolesByUserId(user.getId().intValue());
-//		Set<String> roles = new HashSet<>();
-//		for (TbRole role : roles_) {
-//			roles.add(role.getName());
-//		}
-//		simpleAuthorizationInfo.setRoles(roles);
+		// TODO 设置用户登录时间与登录ip
+		//从数据中获取权限与菜单
+		List<String> pers = permissionService.queryPerCodeByUserId(sessinoUser.getUser().getUserId());
+		sessinoUser.setPers(pers);
+		simpleAuthorizationInfo.addStringPermissions(pers);
+		List<SysMenu> menus = menuService.queryByUserId(sessinoUser.getUser().getUserId());
+		sessinoUser.setMenus(menus);
+		if(StringUtils.isNotBlank(sessinoUser.getUser().getRoleId())){
+			SysRole role = roleService.queryById(sessinoUser.getUser().getRoleId());
+			simpleAuthorizationInfo.addRole(role.getName());
+		}
 		return simpleAuthorizationInfo;
 	}
 
@@ -62,19 +80,16 @@ public class CustomRealm extends AuthorizingRealm {
 		// 取出用户名
 		String username = (String) token.getPrincipal();
 		// 从数据库中去用户
-//		TbUser user = userService.getByUsername(username);
+		SysUser user = userService.queryByUsername(username);
+		if(user == null){
+			return null;
+		}
 		SessionUser sessionUser = new SessionUser();
-		SysUser user = new SysUser();
-		user.setPassword("980665155811dde06762339f6e3a32bc");
-		user.setUsername("aaa");
 		sessionUser.setUser(user);
-		//ZgLFk加盐密码:6a7e70a5cadad52c8c80c4ce31c5da03
-		// 得到用户密码
-		String password = user.getPassword();
 		// 认证用户
 		// 保存用户信息，即吧user类存储在shiro的session中
-		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, password, this.getName());
-		simpleAuthenticationInfo = new SimpleAuthenticationInfo(sessionUser, password,ByteSource.Util.bytes("zeaRW") ,this.getName());
+		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(sessionUser,
+				user.getPassword(), ByteSource.Util.bytes(user.getSalt()), this.getName());
 		return simpleAuthenticationInfo;
 	}
 

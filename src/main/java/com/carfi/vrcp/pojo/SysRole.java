@@ -3,6 +3,8 @@ package com.carfi.vrcp.pojo;
 public class SysRole {
     private String roleId;
 
+    private String organizationId;
+
     private String name;
 
     private Boolean isEffective;
@@ -13,6 +15,14 @@ public class SysRole {
 
     public void setRoleId(String roleId) {
         this.roleId = roleId == null ? null : roleId.trim();
+    }
+
+    public String getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId == null ? null : organizationId.trim();
     }
 
     public String getName() {

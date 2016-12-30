@@ -5,15 +5,17 @@ public class SysPermission {
 
     private String name;
 
-    private Integer perType;
+    private String perType;
 
     private String percode;
 
     private String url;
 
+    private String menuId;
+
     private String parentId;
 
-    private Integer sort;
+    private String sort;
 
     private Boolean isEffective;
 
@@ -33,12 +35,12 @@ public class SysPermission {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getPerType() {
+    public String getPerType() {
         return perType;
     }
 
-    public void setPerType(Integer perType) {
-        this.perType = perType;
+    public void setPerType(String perType) {
+        this.perType = perType == null ? null : perType.trim();
     }
 
     public String getPercode() {
@@ -57,6 +59,14 @@ public class SysPermission {
         this.url = url == null ? null : url.trim();
     }
 
+    public String getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(String menuId) {
+        this.menuId = menuId == null ? null : menuId.trim();
+    }
+
     public String getParentId() {
         return parentId;
     }
@@ -65,12 +75,12 @@ public class SysPermission {
         this.parentId = parentId == null ? null : parentId.trim();
     }
 
-    public Integer getSort() {
+    public String getSort() {
         return sort;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setSort(String sort) {
+        this.sort = sort == null ? null : sort.trim();
     }
 
     public Boolean getIsEffective() {
