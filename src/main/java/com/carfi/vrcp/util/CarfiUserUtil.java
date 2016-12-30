@@ -19,7 +19,7 @@ public class CarfiUserUtil {
 	 * 获取sessionUser
 	 * @return
 	 */
-	public SessionUser getSessionUser(){
+	public static SessionUser getSessionUser(){
 		SessionUser sessionUser = (SessionUser) SecurityUtils.getSubject();
 		return sessionUser;
 	}
@@ -27,21 +27,21 @@ public class CarfiUserUtil {
 	 * 获取当前用户信息
 	 * @return
 	 */
-	public SysUser getSysUser(){
+	public static SysUser getSysUser(){
 		return getSessionUser().getUser();
 	}
 	/**
 	 * 获取当前用户权限
 	 * @return
 	 */
-	public List<String> getPermissions(){
+	public static List<String> getPermissions(){
 		return getSessionUser().getPers();
 	}
 	/**
 	 * 获取当前用户菜单
 	 * @return
 	 */
-	public List<SysMenu> getMens(){
+	public static List<SysMenu> getMens(){
 		return getSessionUser().getMenus();
 	}
 }
