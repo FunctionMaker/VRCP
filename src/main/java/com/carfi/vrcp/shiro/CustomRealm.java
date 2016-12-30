@@ -29,7 +29,7 @@ import com.carfi.vrcp.service.sys.SysUserService;
 /**
  * 自定义的Realm
  * 
- * @author jiangliuhong
+ * @author jiangliuhongO
  * @createTime 2016年7月16日 上午11:54:15
  * @function
  */

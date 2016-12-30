@@ -39,6 +39,14 @@
 				<!-- anno 匿名访问 /** 所有的 -->
 				<!-- /** = authc -->
 				/validatecode.jsp = anon
+				/bootstrapValidator/** = anon
+				/cityselect/** = anon
+				/css/** = anon
+				/dist/** = anon
+				/img/** = anon
+				/js/** = anon
+				/layer/** = anon
+				/vendor/** = anon
 				/** = authc
 			</value>
 		</property>

@@ -3,6 +3,7 @@ package com.carfi.vrcp.util;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 
 import com.carfi.vrcp.pojo.SessionUser;
 import com.carfi.vrcp.pojo.SysMenu;
@@ -20,6 +21,7 @@ public class CarfiUserUtil {
 	 * @return
 	 */
 	public static SessionUser getSessionUser(){
+		Subject subject = SecurityUtils.getSubject();
 		SessionUser sessionUser = (SessionUser) SecurityUtils.getSubject();
 		return sessionUser;
 	}
