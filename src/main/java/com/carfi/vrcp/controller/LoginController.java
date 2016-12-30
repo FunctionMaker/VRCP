@@ -1,5 +1,7 @@
 package com.carfi.vrcp.controller;
 
+import java.util.List;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +17,12 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.carfi.vrcp.pojo.SessionUser;
+import com.carfi.vrcp.pojo.SysMenu;
 import com.carfi.vrcp.constant.Constant;
 import com.carfi.vrcp.util.CarfiUserUtil;
 import com.carfi.vrcp.util.VerifyCodeUtils;
@@ -55,9 +61,22 @@ public class LoginController {
 	 */
 	@RequestMapping("/index")
 	public String index(Model model){
-		Subject currentUser = SecurityUtils.getSubject();
+		List<SysMenu> mens = CarfiUserUtil.getMens();
+		 SessionUser sessionUser = CarfiUserUtil.getSessionUser();
 		model.addAttribute("menus",CarfiUserUtil.getMens());
 		return "index";
+	}
+	/**
+	 * 退出
+	 * @param attr
+	 * @return
+	 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(RedirectAttributes attr) {
+		// 使用权限管理 退出登录
+		SecurityUtils.getSubject().logout();
+		attr.addFlashAttribute("message", "您已安全退出");
+		return "";
 	}
 	
 	/**

@@ -26,18 +26,6 @@
 		<!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
 		<property name="filterChainDefinitions">
 			<value>
-				<!-- 对静态资源设置匿名访问 -->
-				<!-- /image/** = anno /js/** = anno /css/** = anno -->
-				<!-- 配置注销登录的访问地址 -->
-				<!-- /tass.json = anon
-				/validatecode.jsp = anon
-				/logout.html = logout
-				/403.html = anon
-				/user.html = user -->
-				<!-- /user/add.html = perms[user:add:*] /user/query.html = perms[user:query:*] 
-					/user/del.html = perms[user:del:*] /user/update.html = perms[user:update:*] -->
-				<!-- anno 匿名访问 /** 所有的 -->
-				<!-- /** = authc -->
 				/getVerifyCode = anon
 				/validVerifyCode = anon
 				/bootstrapValidator/** = anon

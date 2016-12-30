@@ -17,13 +17,19 @@ import com.carfi.vrcp.pojo.SysUser;
 public class CarfiUserUtil {
 
 	/**
+	 * 获取登录者所有信息
+	 * @return
+	 */
+	public static Subject getSubject(){
+		return SecurityUtils.getSubject();
+	}
+	
+	/**
 	 * 获取sessionUser
 	 * @return
 	 */
 	public static SessionUser getSessionUser(){
-		Subject subject = SecurityUtils.getSubject();
-		SessionUser sessionUser = (SessionUser) SecurityUtils.getSubject();
-		return sessionUser;
+		return (SessionUser)getSubject().getPrincipal();
 	}
 	/**
 	 * 获取当前用户信息
