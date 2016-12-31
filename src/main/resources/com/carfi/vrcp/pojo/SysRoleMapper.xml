@@ -79,4 +79,11 @@
       is_effective = #{isEffective,jdbcType=BIT}
     where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
+  <!-- 根据组织id获取角色 -->
+  <select id="selectByOrgId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where organization_id = #{orgId,jdbcType=VARCHAR} or organization_id is null
+  </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.carfi.vrcp.service.sys;
 
+import java.util.List;
+
 import com.carfi.vrcp.pojo.SysRole;
 
 /**
@@ -15,5 +17,12 @@ public interface SysRoleService {
 	 * @return
 	 */
 	public SysRole queryById(String roleId);
+	/**
+	 * 获取角色列表
+	 * @param orgId
+	 * @return
+	 */
+	public List<SysRole> queryListByOrgId(String orgId,Integer start,Integer length);
+	
 	
 }

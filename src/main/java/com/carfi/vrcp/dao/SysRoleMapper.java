@@ -1,5 +1,7 @@
 package com.carfi.vrcp.dao;
 
+import java.util.List;
+
 import com.carfi.vrcp.pojo.SysRole;
 
 public interface SysRoleMapper {
@@ -14,5 +16,7 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
+    
+    List<SysRole> selectByOrgId(String orgId);
     
 }

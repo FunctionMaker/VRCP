@@ -40,4 +40,11 @@ public interface SysPermissionService {
 	 * @return
 	 */
 	public List<String> queryPerCodeByUserId(String userId,Type.Permission perType);
+	/**
+	 * 根据角色获取权限列表
+	 * @param roleId 角色id
+	 * @return
+	 */
+	public List<SysPermission> queryListByRoleId(String roleId);
+	
 }

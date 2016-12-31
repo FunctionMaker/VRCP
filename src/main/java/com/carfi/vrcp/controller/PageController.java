@@ -19,7 +19,7 @@ public class PageController {
 	 * @param page 文件夹下的jsp页面名称
 	 * @return
 	 */
-	@RequestMapping("/p/{pack}/{page}")
+	@RequestMapping("/carfi/{pack}/{page}")
 	public String page(@PathVariable("pack") String pack,@PathVariable("page") String page){
 		return pack+"/"+page;
 	}

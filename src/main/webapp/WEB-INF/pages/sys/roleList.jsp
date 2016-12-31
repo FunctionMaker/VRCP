@@ -75,7 +75,7 @@
         		},
                 "processing": true,
                 "serverSide": true,
-                "ajax": "<%request.getServletContext().getContextPath();%>/org/role/roleListData",
+                "ajax": "<%request.getServletContext().getContextPath();%>/sys/role/list",
                	"columns": [
                	             { "data": "name" },
                	             { "data": null }
@@ -84,13 +84,13 @@
         		"columnDefs": [ {
 				            "render": function(data, type, row) {
 				            	var component = "";
-				            	component += "<a class='btn btn-info btn-xs 'onclick=query("+ row.id +")><i class='fa fa-pencil'> 查看</i></a>";
-				            	if(row.orgId != null && row.orgId != 'null'){
-					            	component += "&emsp;<a class='btn btn-info btn-xs 'onclick=upd("+ row.id +")><i class='fa fa-pencil'> 修改</i></a>";
-					            	component += "&emsp;<a class='btn btn-danger btn-xs' onclick='del(" + row.id + ")'><i class='fa fa-trash-o'></i> 删除</a>";
+				            	component += "<a class='btn btn-info btn-xs 'onclick=query('"+ row.roleId +"')><i class='fa fa-pencil'> 查看</i></a>";
+				            	if(row.organizationId != null && row.organizationId != 'null'){
+					            	component += "&emsp;<a class='btn btn-info btn-xs 'onclick=upd('"+ row.roleId +"')><i class='fa fa-pencil'> 修改</i></a>";
+					            	component += "&emsp;<a class='btn btn-danger btn-xs' onclick='del('" + row.roleId + "')'><i class='fa fa-trash-o'></i> 删除</a>";
 				            	}
 				            	if(row.hasSonNode){
-				            		component += "&emsp;<a class='btn btn-success btn-xs' onclick='openAndClose(this,"+ row.id +");'><i class='fa fa-chevron-down'></i></a>"
+				            		component += "&emsp;<a class='btn btn-success btn-xs' onclick='openAndClose(this,'"+ row.roleId +"');'><i class='fa fa-chevron-down'></i></a>"
 				            	}
 				                return component;
 				            },

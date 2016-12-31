@@ -17,6 +17,10 @@ public class SessionUser {
 	private List<String> pers;
 	/**菜单*/
 	private List<SysMenu> menus;
+	/**组织信息*/
+	private SysOrganization organization;
+	/**角色信息*/
+	private SysRole role;
 	
 	public String getId() {
 		return id;
@@ -41,6 +45,18 @@ public class SessionUser {
 	}
 	public void setMenus(List<SysMenu> menus) {
 		this.menus = menus;
+	}
+	public SysOrganization getOrganization() {
+		return organization;
+	}
+	public void setOrganization(SysOrganization organization) {
+		this.organization = organization;
+	}
+	public SysRole getRole() {
+		return role;
+	}
+	public void setRole(SysRole role) {
+		this.role = role;
 	}
 	
 	

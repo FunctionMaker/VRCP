@@ -88,6 +88,12 @@ public class CustomRealm extends AuthorizingRealm {
 		sessionUser.setId(user.getUserId());
 		List<SysMenu> menus = menuService.queryByUserId(sessionUser.getUser().getUserId());
 		sessionUser.setMenus(menus);
+		
+		//保存角色信息
+		if(StringUtils.isNotBlank(sessionUser.getUser().getRoleId())){
+			SysRole role = roleService.queryById(sessionUser.getUser().getRoleId());
+			sessionUser.setRole(role);
+		}
 		// 认证用户
 		// 保存用户信息，即把user类存储在shiro的session中
 		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(sessionUser,

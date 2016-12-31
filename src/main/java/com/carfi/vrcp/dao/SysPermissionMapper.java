@@ -26,5 +26,10 @@ public interface SysPermissionMapper {
      * @return
      */
 	List<SysPermission> selectByUserId(@Param("userId")String userId, @Param("perType")String perType);
-
+	/**
+	 * 获取权限列表
+	 * @param roleId 角色id
+	 * @return
+	 */
+	List<SysPermission> selectByRoleId(String roleId);
 }

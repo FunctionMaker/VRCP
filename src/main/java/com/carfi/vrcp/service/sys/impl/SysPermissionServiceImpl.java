@@ -53,6 +53,11 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 		return res;
 	}
 
+	@Override
+	public List<SysPermission> queryListByRoleId(String roleId) {
+		return permissionMapper.selectByRoleId(roleId);
+	}
+
 
 
 

@@ -7,6 +7,8 @@ import org.apache.shiro.subject.Subject;
 
 import com.carfi.vrcp.pojo.SessionUser;
 import com.carfi.vrcp.pojo.SysMenu;
+import com.carfi.vrcp.pojo.SysOrganization;
+import com.carfi.vrcp.pojo.SysRole;
 import com.carfi.vrcp.pojo.SysUser;
 
 /**
@@ -51,5 +53,20 @@ public class CarfiUserUtil {
 	 */
 	public static List<SysMenu> getMens(){
 		return getSessionUser().getMenus();
+	}
+	
+	/**
+	 * 获取当前用户组织信息
+	 * @return
+	 */
+	public static SysOrganization getOrganization(){
+		return getSessionUser().getOrganization();
+	}
+	/**
+	 * 获取角色信息
+	 * @return
+	 */
+	public static SysRole getRole(){
+		return getSessionUser().getRole();
 	}
 }
