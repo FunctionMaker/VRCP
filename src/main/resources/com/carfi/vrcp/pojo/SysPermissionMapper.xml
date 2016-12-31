@@ -155,7 +155,7 @@
 	</if>
   </select>
   <!-- 根据角色id获取权限列表 -->
-  <select id="selectByRoleId" parameterType="java.lang.String" resultMap="p_Column_List">
+  <select id="selectByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
 	select <include refid="p_Column_List"/>
 	from sys_permission p 
 	inner join sys_role_permission rp on rp.permission_id = p.permission_id 
