@@ -17,7 +17,7 @@ public class OrganizationQuery {
 	private Integer pageNum=10;
 	
 	//父级id
-	private Long parentId;
+	private String parentId;
 
 	
 	public String getName() {
@@ -44,11 +44,11 @@ public class OrganizationQuery {
 		this.pageNum = pageNum;
 	}
 
-	public Long getParentId() {
+	public String getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(Long parentId) {
+	public void setParentId(String parentId) {
 		this.parentId = parentId;
 	}
 

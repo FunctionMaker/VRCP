@@ -22,6 +22,30 @@
     organization_id, alias, full_name, contact_man, contact_tel, fixed_tel, spare_contact, 
     email, address, terminal_num, remark, has_son_node, parent_id, is_effective, level
   </sql>
+  
+  <sql id="whereSql" >
+  	 <trim prefix="where" prefixOverrides="and" >
+	    <if test="name!=null">
+	    	and full_name like concat('%',#{name},'%')
+	    </if>
+	    <if test="parentId!=null">
+	       and	parent_id = #{parentId}
+	    </if>
+    </trim>
+  </sql>
+  
+  <select id="selectCountByQuery" parameterType="OrganizationQuery" resultType="int">
+  	select count(*) from sys_organization
+  	<include refid="whereSql"/>
+  </select>
+  
+  <select id="selectAllByQuery" parameterType="OrganizationQuery" resultMap="BaseResultMap" >
+  	 select 
+    <include refid="Base_Column_List" />
+     from sys_organization
+    <include refid="whereSql"/>
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

@@ -48,17 +48,6 @@
     		padding: 20px;
     	}
     </style>
-    <script type="text/javascript">
-    	$(function(){
-    		var url=document.referrer;
-    		if(url.indexOf("/organization/input") != -1){
-    			$("#page-wrapper").load("<%=path%>/carfi/organization/index", {}, function(){});
-    		}else{
-    			//默认打开组织 
-    			$("#page-wrapper").load("<%=path%>/carfi/organization/index", {}, function(){});
-    		}
-    	});
-    </script>
 </head>
 
 <body>
