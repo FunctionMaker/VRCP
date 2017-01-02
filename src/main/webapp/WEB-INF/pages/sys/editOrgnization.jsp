@@ -87,6 +87,7 @@
     	}
  
     </script>
+    
 </head>
 
 <body>
@@ -94,8 +95,7 @@
     <div id="wrapper">
         <div >
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                 	<c:if test="${org==null}">
                 		<h1 class="page-header">添加组织</h1>
                 	</c:if>
@@ -107,16 +107,12 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="panel panel-default">
-
                         <div class="panel-body">
                             <div class="row">
                                 <!-- /.col-lg-6 (nested) -->
-                                <div class="col-lg-12">
-                                    <h1>组织信息</h1>
-                                    <hr>
+                                <div class="col-lg-6">
                                     <form role="form" id="orgForm">
                                             <div class="form-group">
                                                 <label>组织全名：</label>
@@ -146,28 +142,37 @@
                                                 <label>联系人：</label>
                                                 <input class="form-control"  type="text" placeholder="The contact" name="contactMan" value="${org.contactMan}">
                                             </div>
-                                            <div class="form-group">
-                                                <label>组织地址：</label>
-                                                <div id="citySelect"  >
-                                                    <select id="s_province" name="s_province"></select>  
-                                                    <select id="s_city" name="s_city"  required data-bv-notempty-message="The full name is required"></select>  
-                                                    <select id="s_county" name="s_county"></select>
-                                                    <script type="text/javascript">_init_area();</script>
-                                                    <label style="font-weight: normal">详细位置：</label>
-                                                    <input class="" type="text" placeholder="Detailed address" size="50" name="s_detail_addr" id="s_detail_addr">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>备注：</label>
-                                                <input class="form-control"  type="text" placeholder="Remark" name="remark" value="${org.remark}">
-                                            </div>
                                             <input type="hidden" name="orgId" value="${org.id}">
                                             <input type="hidden" name="orgTerminalNum" value="${org.terminalNum}">
                                             <input type="hidden" name="hasSonNode" value="${org.hasSonNode}">
                                             <input type="hidden" name="parent.id" value="${org.parent.id}">
-                                    <hr>
-                                    <h1>组织超级管理员信息</h1>
-                                    <hr>
+                                    	<hr>
+                                    </div>
+                                    <div class="col-lg-6">
+                                   		<div class="form-group">
+                                             <label>组织地址：</label>
+                                             <div id="citySelect">
+                                             	<div class="row">
+                                             		<div class="col-lg-2">
+	                                                 	<select id="s_province" name="s_province" class="form-control"></select>  
+	                                                 </div>
+	                                                 <div class="col-lg-2">
+	                                                 	<select id="s_city" name="s_city" class="form-control" required data-bv-notempty-message="The full name is required"></select>  
+	                                                 </div>
+	                                                 <div class="col-lg-2">
+	                                                 	<select id="s_county" name="s_county" class="form-control"></select>
+	                                                 </div>
+	                                                 <script type="text/javascript">_init_area();</script>
+		                                             <div class="col-lg-4"> 
+		                                                 <input class="form-control"  type="text" placeholder="Detailed address" name="s_detail_addr" id="s_detail_addr">
+                                             		 </div>
+                                             	</div>
+                                             </div>
+                                    	</div>
+                                   		<div class="form-group">
+                                             <label>备注：</label>
+                                             <input class="form-control"  type="text" placeholder="Remark" name="remark" value="${org.remark}">
+                                         </div>
                                         <div class="form-group">
                                             <label>账号名称：</label>
                                             <input class="form-control"  type="text" placeholder="Account" name="accountName" value="${orgUser.accountName}">

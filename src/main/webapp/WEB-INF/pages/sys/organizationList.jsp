@@ -63,7 +63,7 @@
     <script type="text/javascript">
 	  	//修改事件
 	   	function upd(id){
-	    	window.location.href="<%request.getServletContext().getContextPath();%>/organization/input?id="+id;
+	  		window.top.loadContent("<%request.getServletContext().getContextPath();%>/organization/input?id="+id);
 	    };
 	    
 		//删除事件
@@ -216,10 +216,10 @@
 				for(var i=0;i<result.data.length;i++){
 					var rowData = result.data[i];
 					var component = "";
-	            	component += "<a class='btn btn-info btn-xs 'onclick=upd("+ rowData.id +")><i class='fa fa-pencil'> 修改</i></a>";
-	            	component += "&emsp;<a class='btn btn-danger btn-xs' onclick='del(" + rowData.id + ")'><i class='fa fa-trash-o'></i> 删除</a>";
+	            	component += "<a class='btn btn-info btn-xs 'onclick=upd("+ rowData.organizationId +")><i class='fa fa-pencil'> 修改</i></a>";
+	            	component += "&emsp;<a class='btn btn-danger btn-xs' onclick='del(" + rowData.organizationId + ")'><i class='fa fa-trash-o'></i> 删除</a>";
 	            	if(rowData.hasSonNode){
-	            		component += "&emsp;<a class='btn btn-success btn-xs' onclick='openAndClose(this,"+ rowData.id +");'><i class='fa fa-chevron-down'></i></a>"
+	            		component += "&emsp;<a class='btn btn-success btn-xs' onclick='openAndClose(this,"+ rowData.organizationId +");'><i class='fa fa-chevron-down'></i></a>"
 	            	}
 	            	
 	            	var trEle = document.createElement("tr");
